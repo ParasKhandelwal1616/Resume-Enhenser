@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ResumeAI</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <div class="header">
+    <span class="logo">⚡ ResumeAI</span>
+    <button class="icon-btn" id="settingsBtn" title="Settings">⚙</button>
+  </div>
+
+  <!-- MAIN VIEW -->
+  <div id="mainView">
+    <div class="jd-status" id="jdStatus">
+      <span class="dot dot--grey" id="jdDot"></span>
+      <span id="jdLabel">Detecting job page...</span>
+    </div>
+
+    <div class="job-meta" id="jobMeta" style="display:none;">
+      <div class="meta-row"><span class="meta-key">Role</span><span class="meta-val" id="metaTitle">—</span></div>
+      <div class="meta-row"><span class="meta-key">Company</span><span class="meta-val" id="metaCompany">—</span></div>
+    </div>
+
+    <div class="ocr-row">
+      <span class="ocr-label">Or upload a screenshot</span>
+      <label class="upload-btn" for="screenshotInput">📎 Upload</label>
+      <input type="file" id="screenshotInput" accept="image/*" style="display:none;" />
+    </div>
+
+    <button class="btn btn--primary" id="customizeBtn" disabled>
+      ✨ Customize Resume
+    </button>
+
+    <div class="progress-wrap" id="progressWrap" style="display:none;">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">Starting...</div>
+    </div>
+  </div>
+
+  <!-- RESULT VIEW -->
+  <div id="resultView" style="display:none;">
+    <div class="result-score">
+      <div class="score-number" id="scoreNumber">—</div>
+      <div class="score-label">ATS Score</div>
+    </div>
+
+    <div class="missing-kws" id="missingKws" style="display:none;">
+      <div class="section-label">Missing keywords</div>
+      <div class="kw-chips" id="kwChips"></div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn--primary" id="downloadBtn">⬇ Download PDF</button>
+      <button class="btn btn--secondary" id="viewLatexBtn">{ } LaTeX</button>
+    </div>
+
+    <button class="btn btn--ghost" id="backBtn">← Customize another</button>
+  </div>
+
+  <!-- SETTINGS VIEW -->
+  <div id="settingsView" style="display:none;">
+    <div class="settings-title">Settings</div>
+
+    <label class="field-label">AI Provider</label>
+    <select id="providerSelect" class="input">
+      <option value="anthropic">Anthropic (Claude)</option>
+      <option value="openai">OpenAI (GPT-4o)</option>
+      <option value="gemini">Google Gemini</option>
+      <option value="groq">Groq (LLaMA 3.3 - Free)</option>
+    </select>
+
+    <label class="field-label">API Key <span class="hint">(stored locally, never sent to our servers)</span></label>
+    <input type="password" id="apiKeyInput" class="input" placeholder="sk-... or your key" />
+
+    <label class="field-label">Backend URL</label>
+    <input type="text" id="backendUrlInput" class="input" placeholder="https://your-app.onrender.com" />
+
+    <label class="field-label">Master LaTeX Resume</label>
+    <textarea id="latexInput" class="input latex-input" placeholder="Paste your full .tex source here..."></textarea>
+
+    <button class="btn btn--primary" id="saveSettingsBtn">Save Settings</button>
+    <div class="save-msg" id="saveMsg" style="display:none;">✓ Saved</div>
+
+    <button class="btn btn--ghost" id="backFromSettingsBtn">← Back</button>
+  </div>
+
+  <!-- LATEX VIEW -->
+  <div id="latexView" style="display:none;">
+    <div class="settings-title">Customized LaTeX</div>
+    <textarea class="input latex-input" id="latexOutput" readonly></textarea>
+    <button class="btn btn--secondary" id="copyLatexBtn">Copy</button>
+    <button class="btn btn--ghost" id="backFromLatexBtn">← Back</button>
+  </div>
+
+  <script src="../src/popup.js"></script>
+</body>
+</html>

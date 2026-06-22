@@ -1,0 +1,62 @@
+{
+  "manifest_version": 2,
+  "name": "ResumeAI - Auto Resume Customizer",
+  "version": "1.0.0",
+  "description": "Automatically customize your LaTeX resume for any job posting using AI.",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "resumeai@paras",
+      "strict_min_version": "109.0"
+    }
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads",
+    "<all_urls>"
+  ],
+
+  "browser_action": {
+    "default_popup": "public/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://linkedin.com/jobs/*",
+        "*://www.linkedin.com/jobs/*",
+        "*://internshala.com/internship/*",
+        "*://internshala.com/jobs/*",
+        "*://naukri.com/*",
+        "*://www.naukri.com/*",
+        "*://indeed.com/*",
+        "*://www.indeed.com/*",
+        "*://greenhouse.io/*",
+        "*://boards.greenhouse.io/*",
+        "*://lever.co/*",
+        "*://jobs.lever.co/*",
+        "*://wellfound.com/jobs/*",
+        "*://workatastartup.com/*"
+      ],
+      "js": ["src/contentScript.js"]
+    }
+  ],
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
